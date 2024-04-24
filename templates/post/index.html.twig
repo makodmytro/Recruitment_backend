@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Posts{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+    .custom-input {
+        padding: 9px;
+        font-size: 17px;
+        border: 1px solid #aaaaaa;
+        border-radius: 5px
+    }
+
+    .custom-btn {
+        color: #FFFFFF;
+        background-color: #0d6efd;
+        border: none;
+        display: inline-block;
+        font-weight: 400;
+        line-height: 1.5;
+        text-align: center;
+        text-decoration: none;
+        vertical-align: middle;
+        cursor: pointer;
+        padding: .375rem 1.75rem;
+        font-size: 1rem;
+        border-radius: .25rem;
+
+    }
+</style>
+
+<div class="example-wrapper">
+    <h1>Date and Timezone Form</h1>
+    <form action="http://localhost:92/process-form" method="post">
+        <label for="date">Date:</label>
+        <input type="text" name="date" id="date" placeholder="YYYY-MM-DD" class="custom-input" style="margin-left: 40px">
+        <br><br>
+        <label for="timezone">Timezone:</label>
+        <input type="text" name="timezone" id="timezone" placeholder="Europe/London" class="custom-input">
+        <br><br>
+        <button type="submit" class="custom-btn">Submit</button>
+    </form>
+    <br>
+    <article>
+
+        {% for post in posts %}
+            <h1><a href="{{ path('app_post_show', {id: post.id}) }}">{{ post.title }}</a></h1>
+
+            <p>
+                {{ post.content | nl2br }}
+            </p>
+        {% endfor %}
+
+    </article>
+</div>
+{% endblock %}
